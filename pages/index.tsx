@@ -5,7 +5,7 @@ import Layout from '@components/Layout/Layout'
 import RecommendationList from '@components/RecommendationList/RecommendationList'
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await fetch('https://recommender-system.vercel.app/api/recommendation')
+  const response = await fetch('https://gco-project.vercel.app/api/recommendation')
   const { data: recommendationList }: TAPIRecommendationResponse = await response.json()
 
   return {
