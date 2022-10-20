@@ -18,6 +18,7 @@ type Recommendation = {
   name: string
   job: string
   image: Url
+  rating: number[]
   attributes: RecommendationAttributes
 }
 

@@ -14,7 +14,7 @@ const Navbar = () => {
             active={pathname === '/'}
             title="Inicio"
           >
-            GCO
+            Inicio
           </Menu.Item>
         </Link>
       </Container>

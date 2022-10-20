@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import DB from '@database'
 import enablePublicAccess from '@cors'
 
-const AvoDetail = async (req: NextApiRequest, res: NextApiResponse) => {
+const RecommendationDetail = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     // Generally, you would not want this in your apps.
     // See more in 'cors.js'
@@ -22,4 +22,4 @@ const AvoDetail = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default AvoDetail
+export default RecommendationDetail

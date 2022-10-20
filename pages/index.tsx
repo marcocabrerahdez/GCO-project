@@ -19,7 +19,7 @@ const Home = ({ recommendationList }: { recommendationList: Recommendation[] }) 
   return (
     <Layout>
       <section>
-        <p>¿Deberia comer un avo hoy?</p>
+        <p>Hazme una recomendación</p>
       </section>
       <RecommendationList recommendation={recommendationList} />
       <style jsx>{`
