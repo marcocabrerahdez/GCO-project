@@ -36,78 +36,97 @@ export const euclideanDistance = (a: number[], b: number[]) => {
 
 /** Creates a 2d utility matrix using pearson correlation */
 export const pearson = (matrix: number[][]) => {
-  const matrixSize = matrix.length;
-  const utilityMatrix = new Array(matrixSize);
-  for (let i = 0; i < matrixSize; i++) {
-    utilityMatrix[i] = new Array(matrixSize);
-  }
-
-  for (let i = 0; i < matrixSize; i++) {
-    for (let j = 0; j < matrixSize; j++) {
-      if (i === j) {
-        utilityMatrix[i][j] = 0;
-      } else {
-        utilityMatrix[i][j] = pearsonCorrelation(matrix[i], matrix[j]);
+  let auxMatrix = matrix
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+      if (matrix[i][j] === -1) {
+        for (let k = 0; k < auxMatrix.length; k++) {
+          auxMatrix[k].splice(j, 1)
+        }
+        j--;
       }
     }
   }
-
+  const utilityMatrix = new Array(auxMatrix.length-1);
+  for (let j = 1; j < auxMatrix.length; j++) {
+    let aux = pearsonCorrelation(auxMatrix[0], auxMatrix[j])
+    utilityMatrix[j - 1] = aux;
+  }
   return utilityMatrix;
 }
 
 /** Creates a 2d utility matrix using cosine similarity */
 export const cosine = (matrix: number[][]) => {
-  const matrixSize = matrix.length;
-  const utilityMatrix = new Array(matrixSize);
-  for (let i = 0; i < matrixSize; i++) {
-    utilityMatrix[i] = new Array(matrixSize);
-  }
-
-  for (let i = 0; i < matrixSize; i++) {
-    for (let j = 0; j < matrixSize; j++) {
-      if (i === j) {
-        utilityMatrix[i][j] = 0;
-      } else {
-        utilityMatrix[i][j] = cosineSimilarity(matrix[i], matrix[j]);
+  let auxMatrix = matrix
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+      if (matrix[i][j] === -1) {
+        for (let k = 0; k < auxMatrix.length; k++) {
+          auxMatrix[k].splice(j, 1)
+        }
+        j--;
       }
     }
   }
-
+  const utilityMatrix = new Array(auxMatrix.length-1);
+  for (let j = 1; j < auxMatrix.length; j++) {
+    let aux = cosineSimilarity(auxMatrix[0], auxMatrix[j])
+    utilityMatrix[j - 1] = aux;
+  }
   return utilityMatrix;
 }
 
 /** Creates a 2d utility matrix using euclidean distance */
 export const euclidean = (matrix: number[][]) => {
-  const matrixSize = matrix.length;
-  const utilityMatrix = new Array(matrixSize);
-  for (let i = 0; i < matrixSize; i++) {
-    utilityMatrix[i] = new Array(matrixSize);
-  }
-
-  for (let i = 0; i < matrixSize; i++) {
-    for (let j = 0; j < matrixSize; j++) {
-      if (i === j) {
-        utilityMatrix[i][j] = 0;
-      } else {
-        utilityMatrix[i][j] = euclideanDistance(matrix[i], matrix[j]);
+  let auxMatrix = matrix
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+      if (matrix[i][j] === -1) {
+        for (let k = 0; k < auxMatrix.length; k++) {
+          auxMatrix[k].splice(j, 1)
+        }
+        j--;
       }
     }
   }
-
+  const utilityMatrix = new Array(auxMatrix.length-1);
+  for (let j = 1; j < auxMatrix.length; j++) {
+    let aux = euclideanDistance(auxMatrix[0], auxMatrix[j])
+    utilityMatrix[j - 1] = aux;
+  }
   return utilityMatrix;
 }
 
-export const MatrixBuilder = (matrix: number[][], metric: number) => {
+export const MatrixBuilder = (matrix: number[][], metric: number, user: number, neighbours: number) => {
+  console.log(matrix)
+
+  let auxMatrix: number[][] = new Array(0);
+  auxMatrix.push(matrix[user]);
+
+  let i : number = 0;
+  while(auxMatrix.length !== neighbours + 1) {
+    if(i !== user) {
+      auxMatrix.push(matrix[i]);
+    }
+    ++i;
+  }
+
+  let similarity_result: number[] = new Array(0);
   switch (metric) {
     case 1:
-      return cosine(matrix);
+      similarity_result = cosine(auxMatrix);
+      break;
     case 2:
-      return pearson(matrix);
+      similarity_result = pearson(auxMatrix)
+      break;
     case 3:
-      return euclidean(matrix);
+      similarity_result = euclidean(auxMatrix)
+      break;
     default:
-      return cosine(matrix);
+      return matrix;
   }
+  console.log(similarity_result)
+  return [[]];
 }
 
 export default MatrixBuilder;

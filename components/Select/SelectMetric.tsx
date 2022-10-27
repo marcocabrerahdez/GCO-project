@@ -7,13 +7,19 @@ const metricOptions = [
   { key: 'euc', value: 3, text: 'Euclidea' },
 ]
 
-const SelectMetric = () => (
-  <Select placeholder='Select the metric to form the utility matrix' options={metricOptions} onChange={(e, data) => {
-    
-  }}/>
-)
-
-
+/** Change the metric value of MatrixtoTable when change the event */
+const SelectMetric = (props: any) => {
+  const { setMetric } = props
+  return (
+    <Select
+      placeholder="Metrica"
+      options={metricOptions}
+      onChange={(event, data) => {
+        setMetric(data.value)
+      }}
+    />
+  )
+}
 
 export default SelectMetric
 
