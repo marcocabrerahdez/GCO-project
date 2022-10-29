@@ -3,7 +3,6 @@ import { GetStaticProps } from 'next'
 import fetch from 'isomorphic-unfetch'
 import Layout from '@components/Layout/Layout'
 import MyHeader from '@components/Header/Header'
-import SelectGroup from '@components/Select/SelectGroup'
 import FileLoaderContainer from '@components/FileLoader/FileLoaderContainer'
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -17,13 +16,11 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-
 const Home = () => {
   return (
     <Layout>
       <MyHeader/>
       <FileLoaderContainer/>
-      <SelectGroup/>
     </Layout>
   )
 }

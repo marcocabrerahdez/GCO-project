@@ -1,5 +1,6 @@
 import React from "react";
 import MatrixBuilder from "@components/MatrixBuilder/MatrixBuilder";
+import { Table } from 'semantic-ui-react'
 
 /** Matrix Props */
 type MatrixProps = {
@@ -7,26 +8,26 @@ type MatrixProps = {
   metric: number;
   user: number;
   neighbours: number;
+  prediction: number;
 };
 
 /** Show matrix as a table from Selectiom */
 const MatrixtoTable = (props: MatrixProps) => {
-  const { matrix, metric, user, neighbours } = props;
+  const { matrix, metric, user, neighbours, prediction } = props;
   const matrixSize = matrix.length;
-  const utilityMatrix = MatrixBuilder(matrix, metric, user, neighbours);
-
+  const utilityMatrix = MatrixBuilder(matrix, metric, user, neighbours, prediction);
   return (
-    <table>
-      <tbody>
+    <Table inverted compact celled>
+      <Table.Body>
         {utilityMatrix.map((row, index) => (
-          <tr key={index}>
+          <Table.Row key={index}>
             {row.map((value: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined, index: React.Key | null | undefined) => (
-              <td key={index}>{value}</td>
+              <Table.Cell key={index}>{value}</Table.Cell>
             ))}
-          </tr>
+          </Table.Row>
         ))}
-      </tbody>
-    </table>
+      </Table.Body>
+    </Table>
   );
 }
 

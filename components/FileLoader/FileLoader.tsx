@@ -1,5 +1,6 @@
 import MatrixtoTable from '@components/MatrixtoTable/MatrixtoTable';
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
+import { Button, Container, Grid, Input } from 'semantic-ui-react'
 
 /** Loads and reads a txt file and convert the text to a matrix */
 export const loadFile = (file: File): Promise<number[][]> => {
@@ -29,29 +30,88 @@ export const textToMatrix = (text: string): number[][] => {
 const FileLoader = () => {
   const [file, setFile] = useState<File>();
   const [matrix, setMatrix] = useState<number[][]>();
-
+  const [metric, setMetric] = useState<number>(0);
+  const [user, setUser] = useState<number>(0);
+  const [neighbours, setNeighbours] = useState<number>(0);
+  const [prediction, setPrediction] = useState<number>(0);
+  const [start, setStart] = useState<boolean>(false);
   useEffect(() => {
-    if (file) {
+    if (start) {
+      setStart(start);
+    }
+    if (file && start) {
       loadFile(file).then((matrix) => {
         setMatrix(matrix);
       });
     }
-  }, [file]);
+    if (metric) {
+      setMetric(metric);
+    }
+    if (user) {
+      setUser(user);
+    }
+    if (neighbours) {
+      setNeighbours(neighbours);
+    }
+    if (prediction) {
+      setPrediction(prediction);
+    }
+  }, [file, metric, user, neighbours, start, prediction]);
 
   return (
-    <div>
-      <input
-        type="file"
-        onChange={(event) => {
-          const file = event.target.files?.item(0);
-          if (file) {
-            setFile(file);
-          }
-        }}
-      />
-
-      {matrix && <pre><MatrixtoTable matrix={matrix} metric={2} user={0} neighbours={4} /></pre>}
-    </div>
+      <Container textAlign='center'>
+        <Grid textAlign='center' columns='equal'>
+          <Grid.Row>
+            <Grid.Column>
+              <Input transparent
+                type="number"
+                placeholder="Metric"
+                value={metric}
+                onChange={(e) => setMetric(Number(e.target.value))}
+              />
+            </Grid.Column>
+            <Grid.Column>
+              <Input transparent
+                type="number"
+                placeholder="User"
+                value={user}
+                onChange={(e) => setUser(Number(e.target.value))}
+              />
+            </Grid.Column>
+            <Grid.Column>
+              <Input transparent
+                type="number"
+                placeholder="Neighbours"
+                value={neighbours}
+                onChange={(e) => setNeighbours(Number(e.target.value))}
+              />
+            </Grid.Column>
+            <Grid.Column>
+              <Input transparent
+                type="number"
+                placeholder="Prediction"
+                value={prediction}
+                onChange={(e) => setPrediction(Number(e.target.value))}
+              />
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Input icon='file'
+              type="file"
+              onChange={(event) => {
+                const file = event.target.files?.item(0);
+                if (file) {
+                  setFile(file);
+                }
+              }}
+            />
+          </Grid.Row>
+          <Grid.Row>
+            <Button content='Start' onClick={() => setStart(Boolean(true))} />
+          </Grid.Row>
+        </Grid>
+        {matrix && <pre><MatrixtoTable matrix={matrix} metric={metric} user={user} neighbours={neighbours} prediction={prediction} /></pre>}
+      </Container>
   );
 }
 
