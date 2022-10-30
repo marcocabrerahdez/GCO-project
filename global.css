@@ -28,3 +28,13 @@ Grid.Column {
 ProductList {
   display: flex;
 }
+
+.colophon {
+  text-align: center;
+  margin-top: 3.2rem;
+  font-size: 0.8rem;
+}
+.colophon-entry {
+  color: grey;
+  margin-bottom: 0;
+}

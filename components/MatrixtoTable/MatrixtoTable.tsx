@@ -6,16 +6,18 @@ import { Table } from 'semantic-ui-react'
 type MatrixProps = {
   matrix: number[][];
   metric: number;
-  user: number;
   neighbours: number;
   prediction: number;
 };
 
 /** Show matrix as a table from Selectiom */
 const MatrixtoTable = (props: MatrixProps) => {
-  const { matrix, metric, user, neighbours, prediction } = props;
-  const matrixSize = matrix.length;
-  const utilityMatrix = MatrixBuilder(matrix, metric, user, neighbours, prediction);
+  const { matrix, metric, neighbours, prediction } = props;
+  let segment = document.getElementById("operations")
+  if(segment) {
+    segment.innerHTML = '';
+  }
+  const utilityMatrix = MatrixBuilder(matrix, metric, neighbours, prediction);
   return (
     <Table inverted compact celled>
       <Table.Body>

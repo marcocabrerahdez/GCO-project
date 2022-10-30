@@ -1,5 +1,5 @@
+import { generateKey } from 'crypto'
 import React from 'react'
-import Link from 'next/link'
 import { Segment, Container, Grid, List, Header } from 'semantic-ui-react'
 
 const Footer = () => (
@@ -19,18 +19,6 @@ const Footer = () => (
         </p>
       </div>
     </Container>
-
-    <style jsx>{`
-      .colophon {
-        text-align: center;
-        margin-top: 3.2rem;
-        font-size: 0.8rem;
-      }
-      .colophon-entry {
-        color: grey;
-        margin-bottom: 0;
-      }
-    `}</style>
   </Segment>
 )
 

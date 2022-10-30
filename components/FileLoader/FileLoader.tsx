@@ -1,6 +1,6 @@
 import MatrixtoTable from '@components/MatrixtoTable/MatrixtoTable';
 import { useState, useEffect } from 'react';
-import { Button, Container, Grid, Input } from 'semantic-ui-react'
+import { Button, Grid, Input, Header, Container, Segment } from 'semantic-ui-react'
 
 /** Loads and reads a txt file and convert the text to a matrix */
 export const loadFile = (file: File): Promise<number[][]> => {
@@ -31,7 +31,6 @@ const FileLoader = () => {
   const [file, setFile] = useState<File>();
   const [matrix, setMatrix] = useState<number[][]>();
   const [metric, setMetric] = useState<number>(0);
-  const [user, setUser] = useState<number>(0);
   const [neighbours, setNeighbours] = useState<number>(0);
   const [prediction, setPrediction] = useState<number>(0);
   const [start, setStart] = useState<boolean>(false);
@@ -47,21 +46,19 @@ const FileLoader = () => {
     if (metric) {
       setMetric(metric);
     }
-    if (user) {
-      setUser(user);
-    }
     if (neighbours) {
       setNeighbours(neighbours);
     }
     if (prediction) {
       setPrediction(prediction);
     }
-  }, [file, metric, user, neighbours, start, prediction]);
+  }, [file, metric, neighbours, start, prediction]);
 
   return (
-        <Grid stackable columns='equal'>
+        <Grid stackable columns='equal' textAlign='center'>
           <Grid.Row>
             <Grid.Column>
+              <Header as='h3'>Métrica</Header>
               <Input
                 type="number"
                 placeholder="Metric"
@@ -70,14 +67,7 @@ const FileLoader = () => {
               />
             </Grid.Column>
             <Grid.Column>
-              <Input
-                type="number"
-                placeholder="User"
-                value={user}
-                onChange={(e) => setUser(Number(e.target.value))}
-              />
-            </Grid.Column>
-            <Grid.Column>
+              <Header as='h3'>Vecinos</Header>
               <Input
                 type="number"
                 placeholder="Neighbours"
@@ -86,6 +76,7 @@ const FileLoader = () => {
               />
             </Grid.Column>
             <Grid.Column>
+              <Header as='h3'>Predicción</Header>
               <Input
                 type="number"
                 placeholder="Prediction"
@@ -112,7 +103,28 @@ const FileLoader = () => {
               <Button content='Ejecución' onClick={() => setStart(Boolean(true))} />
             </Grid.Column>
           </Grid.Row>
-          {matrix && <pre><MatrixtoTable matrix={matrix} metric={metric} user={user} neighbours={neighbours} prediction={prediction} /></pre>}
+          <Grid.Row stretched>
+            <Grid.Column textAlign='center'>
+              <Header as='h3' block>Matriz Inicial</Header>
+                <Container style={{overflow: 'auto', maxHeight: 400}}>
+                  {matrix && <pre><MatrixtoTable matrix={matrix} metric={0} neighbours={0} prediction={0} /></pre>}
+                </Container>
+            </Grid.Column>
+            <Grid.Column textAlign='center'>
+              <Header as='h3' block>Matriz Resultado</Header>
+              <Container style={{overflow: 'auto', maxHeight: 400}}>
+                  {matrix && <pre><MatrixtoTable matrix={matrix} metric={metric} neighbours={neighbours} prediction={prediction} /></pre>}
+              </Container>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row stretched>
+            <Grid.Column textAlign='center'>
+              <Header as='h3' block>Operaciones</Header>
+              <Container style={{overflow: 'auto', maxWidth: 400}}>
+                <Segment vertical><p id='operations' ></p></Segment>
+              </Container>
+            </Grid.Column>
+          </Grid.Row>
         </Grid>
   );
 }

@@ -16,6 +16,7 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
+
 const Home = () => {
   return (
     <Layout>
