@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next'
 import fetch from 'isomorphic-unfetch'
 import Layout from '@components/Layout/Layout'
 import MyHeader from '@components/Header/Header'
-import FileLoaderContainer from '@components/FileLoader/FileLoaderContainer'
+import FileLoader from '@components/FileLoader/FileLoader'
 
 export const getStaticProps: GetStaticProps = async () => {
   const response = await fetch('https://gco-project.vercel.app/api/recommendation')
@@ -20,7 +20,7 @@ const Home = () => {
   return (
     <Layout>
       <MyHeader/>
-      <FileLoaderContainer/>
+      <FileLoader/>
     </Layout>
   )
 }

@@ -59,11 +59,10 @@ const FileLoader = () => {
   }, [file, metric, user, neighbours, start, prediction]);
 
   return (
-      <Container textAlign='center'>
-        <Grid textAlign='center' columns='equal'>
+        <Grid stackable columns='equal'>
           <Grid.Row>
             <Grid.Column>
-              <Input transparent
+              <Input
                 type="number"
                 placeholder="Metric"
                 value={metric}
@@ -71,7 +70,7 @@ const FileLoader = () => {
               />
             </Grid.Column>
             <Grid.Column>
-              <Input transparent
+              <Input
                 type="number"
                 placeholder="User"
                 value={user}
@@ -79,7 +78,7 @@ const FileLoader = () => {
               />
             </Grid.Column>
             <Grid.Column>
-              <Input transparent
+              <Input
                 type="number"
                 placeholder="Neighbours"
                 value={neighbours}
@@ -87,7 +86,7 @@ const FileLoader = () => {
               />
             </Grid.Column>
             <Grid.Column>
-              <Input transparent
+              <Input
                 type="number"
                 placeholder="Prediction"
                 value={prediction}
@@ -96,22 +95,25 @@ const FileLoader = () => {
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
-            <Input icon='file'
-              type="file"
-              onChange={(event) => {
-                const file = event.target.files?.item(0);
-                if (file) {
-                  setFile(file);
-                }
-              }}
-            />
+            <Grid.Column textAlign='center'>
+              <Input icon='file'
+                type="file"
+                onChange={(event) => {
+                  const file = event.target.files?.item(0);
+                  if (file) {
+                    setFile(file);
+                  }
+                }}
+              />
+            </Grid.Column>
           </Grid.Row>
           <Grid.Row>
-            <Button content='Start' onClick={() => setStart(Boolean(true))} />
+            <Grid.Column textAlign='center'>
+              <Button content='Ejecución' onClick={() => setStart(Boolean(true))} />
+            </Grid.Column>
           </Grid.Row>
+          {matrix && <pre><MatrixtoTable matrix={matrix} metric={metric} user={user} neighbours={neighbours} prediction={prediction} /></pre>}
         </Grid>
-        {matrix && <pre><MatrixtoTable matrix={matrix} metric={metric} user={user} neighbours={neighbours} prediction={prediction} /></pre>}
-      </Container>
   );
 }
 
