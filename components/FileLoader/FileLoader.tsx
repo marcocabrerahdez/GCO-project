@@ -124,7 +124,7 @@ const FileLoader = () => {
               <Grid.Column textAlign='center'>
                 <Header as='h3' block>Operaciones</Header>
                 <Container style={{overflow: 'auto', maxWidth: 400}}>
-                  <Segment vertical><p id='operations' ></p></Segment>
+                  <Segment vertical><p id='operations'></p></Segment>
                 </Container>
               </Grid.Column>
             </Grid.Row>
