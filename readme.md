@@ -27,7 +27,7 @@ Por ultimo, se alamacena un historial de operaciones que se muestra por pantalla
   2. Desviación de la media
 ```
 
-**Ejemplo de uso**
+**Ejemplos de uso**
 
 1. Ingresar en la web [GCO-Project](https://gco-project.vercel.app)
 2. Elegir valores para la métrica, vecinos y tipo de predicción
