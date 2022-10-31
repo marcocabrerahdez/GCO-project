@@ -103,28 +103,32 @@ const FileLoader = () => {
               <Button content='Ejecución' onClick={() => setStart(Boolean(true))} />
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row stretched>
-            <Grid.Column textAlign='center'>
-              <Header as='h3' block>Matriz Inicial</Header>
+          {start &&
+            <Grid.Row stretched>
+              <Grid.Column textAlign='center'>
+                <Header as='h3' block>Matriz Inicial</Header>
+                  <Container style={{overflow: 'auto', maxHeight: 400}}>
+                    {matrix && <pre><MatrixtoTable matrix={matrix} metric={0} neighbours={0} prediction={0} /></pre>}
+                  </Container>
+              </Grid.Column>
+              <Grid.Column textAlign='center'>
+                <Header as='h3' block>Matriz Resultado</Header>
                 <Container style={{overflow: 'auto', maxHeight: 400}}>
-                  {matrix && <pre><MatrixtoTable matrix={matrix} metric={0} neighbours={0} prediction={0} /></pre>}
+                    {matrix && <pre><MatrixtoTable matrix={matrix} metric={metric} neighbours={neighbours} prediction={prediction} /></pre>}
                 </Container>
-            </Grid.Column>
-            <Grid.Column textAlign='center'>
-              <Header as='h3' block>Matriz Resultado</Header>
-              <Container style={{overflow: 'auto', maxHeight: 400}}>
-                  {matrix && <pre><MatrixtoTable matrix={matrix} metric={metric} neighbours={neighbours} prediction={prediction} /></pre>}
-              </Container>
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row stretched>
-            <Grid.Column textAlign='center'>
-              <Header as='h3' block>Operaciones</Header>
-              <Container style={{overflow: 'auto', maxWidth: 400}}>
-                <Segment vertical><p id='operations' ></p></Segment>
-              </Container>
-            </Grid.Column>
-          </Grid.Row>
+              </Grid.Column>
+            </Grid.Row>
+          }
+          {start &&
+            <Grid.Row stretched>
+              <Grid.Column textAlign='center'>
+                <Header as='h3' block>Operaciones</Header>
+                <Container style={{overflow: 'auto', maxWidth: 400}}>
+                  <Segment vertical><p id='operations' ></p></Segment>
+                </Container>
+              </Grid.Column>
+            </Grid.Row>
+          }
         </Grid>
   );
 }
