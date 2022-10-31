@@ -2,6 +2,8 @@
 
 **Descripción de código desarrollado**
 
+Nuestra implementación del sistema recomendador hace uso del framework Next.JS basado en React, en esta implmentación se ha definido una página principal en la cuál se nos presentan 3 selectores que especifican los parámetros de ejecución y calculo del sistema recomendandor.
+
 
 Una vez introducidos los parámetros, se puede proceder a la carga de la matriz, mediante el boton *Ejecucion* que invoca a la funcion que construye la matriz resultado. Esta función, además de mostrar la matriz, invova a otra función que busca en cada iteración el usuario que tiene una entrada sin valorar, fijando este usuario para realizar la predicción. Antes de proseguir, se seleccionan tantos vecinos adyacentes como se han especificado por entrada y se calcula la métrica sobre esos valores. A continuación, con la matriz de utilidad se comienza a realizar la predicción según se haya seleccionado. Esta hace uso de todas los parámetros dados por pantalla y la matriz de utilidad. Todo esto se repite mientras hayan usuario con objetos sin valorar, esto se hace recursivamente hasta que se valoran todas las incógnitas. 
 
